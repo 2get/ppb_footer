@@ -14,9 +14,7 @@ module PpbFooter
     TIMEOUT = 3
 
     def open_with_cache(service, ssl = false)
-      unless File.directory?(CACHE_BASE_PATH)
-        FileUtils.mkdir_p(CACHE_BASE_PATH)
-      end
+      FileUtils.mkdir_p(CACHE_BASE_PATH)
 
       url = 'http://ppbapp.com/sp_footer/?service=#{service}&charset=UTF-8'
       url.sub!(/http/, 'https') if ssl
