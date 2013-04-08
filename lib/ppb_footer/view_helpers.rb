@@ -20,8 +20,11 @@ module PpbFooter
     def open_with_cache(service, ssl = false)
       FileUtils.mkdir_p(CACHE_BASE_PATH)
 
-      url = "http://ppbapp.com/sp_footer/?service=#{service}&charset=UTF-8"
-      url.sub!(/http/, 'https') if ssl
+      url = if ssl
+              "https://secure.paperboy.co.jp/sp_footer/?service=#{service}&charset=UTF-8"
+            else
+              "http://www.paperboy.co.jp/sp_footer/?service=#{service}&charset=UTF-8"
+            end
 
       hash     = Digest::MD5.new.update(url).to_s
       filename = CACHE_BASE_PATH + "paperboy_smartphone_#{service}_footer_#{hash}"
