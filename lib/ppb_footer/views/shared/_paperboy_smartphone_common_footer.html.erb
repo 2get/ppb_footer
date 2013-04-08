@@ -1,5 +1,0 @@
-<% unless request.ssl? %>
-  <% cache('paperboy_smartphone_common_footer', :expires_in => 15.minutes) do %>
-    <%= PpbFooter::Helper.open_with_cache %>
-  <% end %>
-<% end %>

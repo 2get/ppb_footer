@@ -11,14 +11,15 @@ module PpbFooter
     CACHE_LIFE = 3600
     CACHE_BASE_PATH = RAILS_ROOT + '/tmp/cache/'
 
-    FOOTER_URL = 'http://ppbapp.com/sp_footer/?service=30days&charset=UTF-8'
-
     TIMEOUT = 3
 
-    def open_with_cache
+    def open_with_cache(service, ssl = false)
       unless File.directory?(CACHE_BASE_PATH)
         FileUtils.mkdir_p(CACHE_BASE_PATH)
       end
+
+      url = 'http://ppbapp.com/sp_footer/?service=#{service}&charset=UTF-8'
+      url.sub!(/http/, 'https') if ssl
 
       hash =     Digest::MD5.new.update(FOOTER_URL).to_s
       filename = CACHE_BASE_PATH + "paperboy_smartphone_common_footer_#{hash}"

@@ -1,0 +1,3 @@
+<% cache('paperboy_smartphone_common_footer', :expires_in => 15.minutes) do %>
+  <%= PpbFooter::ViewHelpers.open_with_cache('30days', request.ssl?) %>
+<% end %>
