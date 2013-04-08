@@ -1,6 +1,10 @@
-require "ppb_footer/version"
-require "ppb_footer/helpers"
+require 'ppb_footer/version'
 
-ActionView::Base.class_eval { include PpbFooter::Helper }
+if defined?(Rails::Railtie)
+  require 'ppb_footer/railtie'
+else
+  require 'ppb_footer/helpers'
+  ActionView::Base.class_eval { include PpbFooter::Helper }
+end
 
 ActionController::Base.prepend_view_path File.expand_path("../ppb_footer/views", __FILE__)
