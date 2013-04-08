@@ -3,7 +3,7 @@ require 'ppb_footer/version'
 if defined?(Rails::Railtie)
   require 'ppb_footer/railtie'
 else
-  require 'ppb_footer/helpers'
+  require 'ppb_footer/view_helpers'
   ActionView::Base.class_eval { include PpbFooter::ViewHelpers }
 end
 
