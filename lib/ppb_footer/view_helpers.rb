@@ -7,7 +7,7 @@ require 'digest/md5'
 require 'fileutils'
 
 module PpbFooter
-  module Helper
+  module ViewHelpers
     CACHE_LIFE = 3600
     CACHE_BASE_PATH = RAILS_ROOT + '/tmp/cache/'
 
