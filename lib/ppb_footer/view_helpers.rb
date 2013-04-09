@@ -9,16 +9,10 @@ require 'fileutils'
 module PpbFooter
   module ViewHelpers
     CACHE_LIFE = 3600
-    root = if Rails.root.class == Pathname
-             Rails.root.to_s
-           else
-             Rails.root
-           end
-    CACHE_BASE_PATH = root + '/tmp/cache/'
     TIMEOUT = 3
 
     def open_with_cache(service, ssl = false)
-      FileUtils.mkdir_p(CACHE_BASE_PATH)
+      FileUtils.mkdir_p(cache_base_path)
 
       url = if ssl
               "https://secure.paperboy.co.jp/sp_footer/?service=#{service}&charset=UTF-8"
@@ -27,7 +21,7 @@ module PpbFooter
             end
 
       hash     = Digest::MD5.new.update(url).to_s
-      filename = CACHE_BASE_PATH + "paperboy_smartphone_#{service}_footer_#{hash}"
+      filename = cache_base_path + "paperboy_smartphone_#{service}_footer_#{hash}"
 
       if File.exist?(filename)
         content = open(filename, 'r:utf-8').read
@@ -49,7 +43,16 @@ module PpbFooter
       end
       content
     end
-
     module_function :open_with_cache
+
+    def cache_base_path
+      root = if Rails.root.class == Pathname
+               Rails.root.to_s
+             else
+               Rails.root
+             end
+      root + '/tmp/cache/'
+    end
+    module_function :cache_base_path
   end
 end
