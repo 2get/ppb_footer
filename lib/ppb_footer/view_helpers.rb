@@ -43,10 +43,7 @@ module PpbFooter
       end
       content
     end
-
     module_function :open_with_cache
-
-    private
 
     def cache_base_path
       root = if Rails.root.class == Pathname
@@ -56,5 +53,6 @@ module PpbFooter
              end
       root + '/tmp/cache/'
     end
+    module_function :cache_base_path
   end
 end
