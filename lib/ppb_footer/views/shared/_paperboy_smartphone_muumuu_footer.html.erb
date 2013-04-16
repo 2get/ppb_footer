@@ -1,0 +1,3 @@
+<% cache('paperboy_smartphone_muumuu-domain_footer', :expires_in => 15.minutes) do %>
+  <%= raw(PpbFooter::ViewHelpers.open_with_cache('muumuu', request.ssl?)) %>
+<% end %>
