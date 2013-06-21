@@ -1,0 +1,3 @@
+<% cache("paperboy_pc_footer", :expires_in => 15.minutes) do %>
+  <%= raw(PpbFooter::ViewHelpers.render_pc_footer) %>
+<% end %>
