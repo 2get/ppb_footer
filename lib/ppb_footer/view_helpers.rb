@@ -15,7 +15,7 @@ module PpbFooter
 
     def render_pc_footer
       content = ''
-      first = true
+      retry_count = 1
       group_csv   = 'http://www.paperboy.co.jp/footer/paperboy_footer_group.csv'
       service_csv = 'http://www.paperboy.co.jp/footer/paperboy_footer.csv'
 
@@ -69,8 +69,8 @@ HTML
         here        = File.dirname(__FILE__)
         group_csv   = File.join(here, '../../data/paperboy_footer_group.csv')
         service_csv = File.join(here, '../../data/paperboy_footer.csv')
-        if first
-          first = false
+        if retry_count > 0
+          retry_count -= 1
           retry
         end
       end
